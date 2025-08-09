@@ -1,0 +1,11 @@
+{
+  "files": {
+    "main.js": "/its-scanner/static/js/main.2b005119.js",
+    "static/media/tkmLogo.png": "/its-scanner/static/media/tkmLogo.b61653be849892f769a3.png",
+    "index.html": "/its-scanner/index.html",
+    "main.2b005119.js.map": "/its-scanner/static/js/main.2b005119.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.2b005119.js"
+  ]
+}
