@@ -60,9 +60,9 @@ export default function EventCreate() {
     (async () => {
       try {
         const [{ data: t }, { data: locs }, { data: eps }] = await Promise.all([
-          supabase.from('event_type').select('id, name, code, status').order('name'),
+          supabase.from('event_types').select('id, name, code, status').order('name'),
           supabase.from('locations').select('id, name').order('name'),
-          supabase.from('entry_points').select('id, name, location_id, status').order('name'),
+          supabase.from('entry_points').select('id, name, location_id').order('name'),
         ]);
         setTypes((t || []).filter(r => (r.status || 'active') === 'active'));
         setLocations(locs || []);
@@ -113,7 +113,7 @@ export default function EventCreate() {
   const validate = () => {
     if (!program.title.trim()) return 'Event title is required.';
     if (!String(program.event_type_id)) return 'Event Type is required.';
-    if (!occurrences.length) return 'At least one occurrence is required.';
+    if (!occurrences.length) return 'At least one location is required.';
     for (let i = 0; i < occurrences.length; i++) {
       const oc = occurrences[i];
       const label = `Occurrence #${i + 1}`;
@@ -385,7 +385,7 @@ export default function EventCreate() {
                 </div>
 
                 <div>
-                  <label style={label}>Entry Points (optional, multi)</label>
+                  <label style={label}>Entry Points (multiple)</label>
                   <select
                     multiple
                     style={{ ...selectStyle, minHeight: 120 }}
@@ -416,7 +416,7 @@ export default function EventCreate() {
               onClick={addOccurrence}
               style={{ background: '#1C1C1C', color: '#fff', border: 'none', borderRadius: 999, padding: '10px 16px', fontWeight: 800, cursor: 'pointer' }}
             >
-              + Add another occurrence
+              + Add another location
             </button>
           </div>
         </div>
